@@ -9,12 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.zip.DeflaterOutputStream;
-import java.util.zip.InflaterInputStream;
 
 /**
  * @author : Vladimir Ruzhansky
@@ -57,13 +53,13 @@ public class KryoTest {
         Kryo kryo = new Kryo();
 
 
-        Output output = new Output(new DeflaterOutputStream(new FileOutputStream("file.bin")));
+        Output output = new Output(4096);
         kryo.writeObject(output, priceTick);
         output.close();
 
-        logger.info("Serialized by kryo: {}", output);
+        logger.info("Serialized by kryo, size: {}", output.total());
 
-        Input input = new Input(new InflaterInputStream(new FileInputStream("file.bin")));
+        Input input = new Input(output.getBuffer());
         PriceTick restoredPriceTick = kryo.readObject(input, PriceTick.class);
         input.close();
 
