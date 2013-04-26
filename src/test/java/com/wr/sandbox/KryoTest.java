@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.zip.DeflaterInputStream;
 import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
 
 /**
  * @author : Vladimir Ruzhansky
@@ -63,7 +64,7 @@ public class KryoTest {
 
         logger.info("Serialized by kryo: {}", output);
 
-        Input input = new Input(new DeflaterInputStream(new FileInputStream("file.bin")));
+        Input input = new Input(new InflaterInputStream(new FileInputStream("file.bin")));
         PriceTick restoredPriceTick = kryo.readObject(input, PriceTick.class);
         input.close();
 
