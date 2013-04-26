@@ -1,5 +1,7 @@
 package com.wr.sandbox.model;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -33,6 +35,32 @@ public class QuoteContainer {
 
     public void setQuoteBid(Quote quoteBid) {
         this.quoteBid = quoteBid;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        QuoteContainer that = (QuoteContainer) other;
+        return new EqualsBuilder()
+                .append(this.quoteAsk, that.quoteAsk)
+                .append(this.quoteBid, that.quoteBid)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(this.quoteAsk)
+                .append(this.quoteBid)
+                .toHashCode();
     }
 
     @Override

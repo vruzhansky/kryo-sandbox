@@ -1,5 +1,7 @@
 package com.wr.sandbox.model;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -35,6 +37,32 @@ public class Quote {
 
     public void setQuoteRef(String quoteRef) {
         this.quoteRef = quoteRef;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        Quote that = (Quote) other;
+        return new EqualsBuilder()
+                .append(this.price, that.price)
+                .append(this.quoteRef, that.quoteRef)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(this.price)
+                .append(this.quoteRef)
+                .toHashCode();
     }
 
     @Override

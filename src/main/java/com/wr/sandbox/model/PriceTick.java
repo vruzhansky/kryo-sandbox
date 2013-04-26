@@ -1,5 +1,7 @@
 package com.wr.sandbox.model;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -57,6 +59,38 @@ public class PriceTick {
 
     public void setQuoteContainer(QuoteContainer quoteContainer) {
         this.quoteContainer = quoteContainer;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        PriceTick that = (PriceTick) other;
+        return new EqualsBuilder()
+                .append(this.instrumentType, that.instrumentType)
+                .append(this.instrumentClass, that.instrumentClass)
+                .append(this.timestamp, that.timestamp)
+                .append(this.currencyPair, that.currencyPair)
+                .append(this.quoteContainer, that.quoteContainer)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(this.instrumentType)
+                .append(this.instrumentClass)
+                .append(this.timestamp)
+                .append(this.currencyPair)
+                .append(this.quoteContainer)
+                .toHashCode();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.wr.sandbox.model;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -33,6 +35,32 @@ public class CurrencyPair {
 
     public void setCcy2(String ccy2) {
         this.ccy2 = ccy2;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        CurrencyPair that = (CurrencyPair) other;
+        return new EqualsBuilder()
+                .append(this.ccy1, that.ccy1)
+                .append(this.ccy2, that.ccy2)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(this.ccy1)
+                .append(this.ccy2)
+                .toHashCode();
     }
 
     @Override

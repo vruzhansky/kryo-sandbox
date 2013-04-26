@@ -6,6 +6,7 @@ import com.esotericsoftware.kryo.io.Output;
 import com.wr.sandbox.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -53,5 +54,6 @@ public class KryoTest {
 
         logger.info("Restored price tick: {}", restoredPriceTick);
 
+        Assert.assertEquals(priceTick, restoredPriceTick);
     }
 }
