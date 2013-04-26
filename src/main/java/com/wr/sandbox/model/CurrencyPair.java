@@ -11,6 +11,14 @@ public class CurrencyPair {
     private String ccy1;
     private String ccy2;
 
+    public CurrencyPair() {
+    }
+
+    public CurrencyPair(String ccy1, String ccy2) {
+        this.ccy1 = ccy1;
+        this.ccy2 = ccy2;
+    }
+
     public String getCcy1() {
         return ccy1;
     }

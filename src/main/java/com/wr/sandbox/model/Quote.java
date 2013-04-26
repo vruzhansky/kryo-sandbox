@@ -13,6 +13,14 @@ public class Quote {
     private BigDecimal price;
     private String quoteRef;
 
+    public Quote() {
+    }
+
+    public Quote(BigDecimal price, String quoteRef) {
+        this.price = price;
+        this.quoteRef = quoteRef;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }

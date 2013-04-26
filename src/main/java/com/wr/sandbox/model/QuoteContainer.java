@@ -11,6 +11,14 @@ public class QuoteContainer {
     private Quote quoteAsk;
     private Quote quoteBid;
 
+    public QuoteContainer() {
+    }
+
+    public QuoteContainer(Quote quoteAsk, Quote quoteBid) {
+        this.quoteAsk = quoteAsk;
+        this.quoteBid = quoteBid;
+    }
+
     public Quote getQuoteAsk() {
         return quoteAsk;
     }

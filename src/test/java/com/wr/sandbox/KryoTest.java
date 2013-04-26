@@ -25,26 +25,14 @@ public class KryoTest {
     public void setUp() throws Exception {
         priceTick = new PriceTick();
 
-        Quote quoteA = new Quote();
-        Quote quoteB = new Quote();
-        quoteA.setPrice(new BigDecimal("1.31"));
-        quoteA.setQuoteRef("ref_quote_a");
-        quoteB.setPrice(new BigDecimal("1.41"));
-        quoteB.setQuoteRef("ref_quote_b");
-
-        QuoteContainer quoteContainer = new QuoteContainer();
-        quoteContainer.setQuoteAsk(quoteA);
-        quoteContainer.setQuoteBid(quoteB);
-
-        CurrencyPair currencyPair = new CurrencyPair();
-        currencyPair.setCcy1("USD");
-        currencyPair.setCcy2("CHF");
+        Quote quoteA = new Quote(new BigDecimal("1.31"), "ref_quote_a");
+        Quote quoteB = new Quote(new BigDecimal("1.41"), "ref_quote_b");
 
         priceTick.setInstrumentClass(InstrumentClass.FX);
         priceTick.setInstrumentType(InstrumentType.SPOT);
-        priceTick.setCurrencyPair(currencyPair);
+        priceTick.setCurrencyPair(new CurrencyPair("USD", "CHF"));
         priceTick.setTimestamp(new Date());
-        priceTick.setQuoteContainer(quoteContainer);
+        priceTick.setQuoteContainer(new QuoteContainer(quoteA, quoteB));
     }
 
     @Test
