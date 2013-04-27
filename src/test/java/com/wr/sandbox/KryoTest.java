@@ -41,6 +41,18 @@ public class KryoTest {
         logger.info("Created price tick {}", priceTick);
         Kryo kryo = new Kryo();
 
+        kryo.setRegistrationRequired(true);
+        logger.info("Next available registration id is {}", kryo.getNextRegistrationId());
+        // trying to avoid using fully qualified names
+        kryo.register(CurrencyPair.class);
+        kryo.register(InstrumentClass.class);
+        kryo.register(InstrumentType.class);
+        kryo.register(PriceTick.class);
+        kryo.register(Quote.class);
+        kryo.register(QuoteContainer.class);
+        kryo.register(BigDecimal.class);
+        kryo.register(Date.class);
+
 
         Output output = new Output(4096);
         kryo.writeObject(output, priceTick);
