@@ -53,12 +53,12 @@ public class KryoTest {
         kryo.register(BigDecimal.class);
         kryo.register(Date.class);
 
-
+        long timeStart = System.nanoTime();
         Output output = new Output(4096);
         kryo.writeObject(output, priceTick);
         output.close();
 
-        logger.info("Serialized by kryo, size: {}", output.total());
+        logger.info("Serialized by kryo, size: {}, time elapsed: {} ms", output.total(), (System.nanoTime() - timeStart) / 1000000);
 
         Input input = new Input(output.getBuffer());
         PriceTick restoredPriceTick = kryo.readObject(input, PriceTick.class);
