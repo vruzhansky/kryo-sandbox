@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -65,6 +66,10 @@ public class KryoTest {
         input.close();
 
         logger.info("Restored price tick: {}", restoredPriceTick);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        logger.info("parsed date: {}", sdf.parse("2000-15--4"));
 
         Assert.assertEquals(priceTick, restoredPriceTick);
     }
